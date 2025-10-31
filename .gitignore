@@ -1,0 +1,20 @@
+# Ignora TODAS as pastas node_modules no projeto
+node_modules/
+
+# Ignora arquivos de ambiente (MUITO IMPORTANTE)
+.env
+
+# Ignora a pasta 'dist' do PWA (vamos gerar isso na Netlify)
+tic-pwa/dist
+
+# Ignora a pasta 'dist' da API (vamos gerar isso no Render)
+tic-api/dist
+
+# Arquivos do sistema operacional
+.DS_Store
+Thumbs.db
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
