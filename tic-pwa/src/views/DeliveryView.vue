@@ -1,22 +1,31 @@
 <script setup>
+// Imports existentes
 import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import axios from 'axios';
 
-const route = useRoute();
-const baseUrl = 'https://tic-api-apn3.onrender.com'; 
+// --- NOSSAS ADIÇÕES ---
+import { useRouter } from 'vue-router'; // 1. Para redirecionar
+import PedidoConfirmado from '@/components/PedidoConfirmado.vue'; // 2. A animação
 
+// Refs existentes
+const route = useRoute();
+const baseUrl = 'https://tic-api-apn3.onrender.com';
 const receitaId = route.params.id;
 const receita = ref(null);
 const ofertas = ref([]);
 const carregando = ref(true);
 
-// Função auxiliar para gerar valores aleatórios
+// --- NOSSAS ADIÇÕES ---
+const router = useRouter(); // Instância do roteador
+const showConfirmacao = ref(false); // 3. Controla a animação
+
+// Função auxiliar (existente)
 function gerarNumeroAleatorio(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-// Função para criar as ofertas fixas com valores aleatórios
+// Função para criar as ofertas fixas (existente)
 function gerarOfertasFixas() {
   const restaurantesFixos = [
     { nome: 'Sabor Caseiro' },
@@ -34,19 +43,17 @@ function gerarOfertasFixas() {
   }));
 }
 
+// onMounted (existente, sem mudanças)
 onMounted(async () => {
   if (!receitaId) {
     console.error('ERRO: ID da receita não encontrado na URL!');
     carregando.value = false;
     return;
   }
-
   try {
     console.log(`Tentando buscar receita: ${baseUrl}/recipes/${receitaId}`);
     const resReceita = await axios.get(`${baseUrl}/recipes/${receitaId}`);
     receita.value = resReceita.data;
-
-    // Se quiser manter o endpoint original, pode tentar buscar:
     try {
       const resOfertas = await axios.get(`${baseUrl}/recipes/${receitaId}/ofertas`);
       ofertas.value = resOfertas.data;
@@ -54,18 +61,36 @@ onMounted(async () => {
       console.warn("Nenhuma oferta encontrada no backend, gerando ofertas fixas...");
       ofertas.value = gerarOfertasFixas();
     }
-
-    // Caso o backend não traga nada, garante as fixas
     if (!ofertas.value || ofertas.value.length === 0) {
       ofertas.value = gerarOfertasFixas();
     }
-
   } catch (error) {
     console.error("Erro ao buscar dados para o delivery:", error);
   } finally {
     carregando.value = false;
   }
 });
+
+// --- NOSSAS FUNÇÕES NOVAS ---
+
+/**
+ * 4. Esta função é chamada pelo botão.
+ * Por enquanto, ela só ativa a animação.
+ */
+function finalizarPedido() {
+  // TODO: Adicionar lógica para verificar qual rádio foi selecionado.
+  
+  // Ativa o overlay animado
+  showConfirmacao.value = true;
+}
+
+/**
+ * 5. Esta função é chamada pelo @close do componente de animação.
+ */
+function handleConfirmacaoClose() {
+  // Redireciona o usuário para a página inicial
+  router.push('/');
+}
 </script>
 
 <template>
@@ -80,14 +105,10 @@ onMounted(async () => {
         
         <div class="item-pedido">
           <img 
-            :src="`${baseUrl}${receita.imageUrl || (receita.name?.includes('Lasanha') ? '/images/lasanha.jpg' : '/images/bolo-de-cenoura.jpg')}`" 
-            :alt="receita.name" 
-            class="item-imagem"
-            @error="($event) => $event.target.src=`${baseUrl}/images/placeholder.png`" 
+            :src="receita.imageUrl" :alt="receita.title" class="item-imagem"
           /> 
           <div class="item-info">
-            <span class="item-nome">{{ receita.name }}</span>
-            <span class="item-qtd">QNT: 1x</span>
+            <span class="item-nome">{{ receita.title }}</span> <span class="item-qtd">QNT: 1x</span>
           </div>
         </div>
 
@@ -106,15 +127,18 @@ onMounted(async () => {
 
         <p v-else>Nenhum restaurante oferece esta receita no momento.</p>
 
-        <button class="botao-finalizar">Confirmar Pedido</button>
+        <button @click="finalizarPedido" class="botao-finalizar">Confirmar Pedido</button>
       </div>
 
       <p v-else>Ops! Receita não encontrada.</p>
     </div>
   </div>
+
+  <PedidoConfirmado :show="showConfirmacao" @close="handleConfirmacaoClose" />
 </template>
 
 <style scoped>
+/* Seu CSS não muda nada, continua perfeito */
 .pagina { 
   padding: 2rem; 
   padding-top: 80px; 
