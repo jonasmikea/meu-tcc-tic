@@ -16,7 +16,7 @@ const authStore = useAuthStore();
 
 onMounted(async () => {
   try {
-    const response = await axios.get(`https://tic-api-jonas.onrender.com/recipes/${recipeId}`);
+    const response = await axios.get(`https://tic-api-apn3.onrender.com/recipes/${recipeId}`);
     recipe.value = response.data;
   } catch (error) {
     console.error('Erro ao buscar a receita:', error);
@@ -49,7 +49,7 @@ function irParaDelivery() {
   </div>
   <div v-else class="recipe-details">
     <h1>{{ recipe.title }}</h1>
-    <img :src="`https://tic-api-jonas.onrender.com${recipe.imageUrl}`" :alt="recipe.title" class="recipe-image">
+    <img :src="`https://tic-api-apn3.onrender.com${recipe.imageUrl}`" :alt="recipe.title" class="recipe-image">
     <p class="description">{{ recipe.description }}</p>
 
     <div class="actions">

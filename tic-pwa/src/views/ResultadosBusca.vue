@@ -13,7 +13,7 @@ watchEffect(async () => {
   if (termoDeBusca) {
     try {
       carregando.value = true;
-      const response = await axios.get(`https://tic-api-jonas.onrender.com/recipes?q=${termoDeBusca}`); // LINHA CORRIGIDA
+      const response = await axios.get(`https://tic-api-apn3.onrender.com/recipes?q=${termoDeBusca}`); // LINHA CORRIGIDA
       receitas.value = response.data;
     } catch (error) {
       console.error('Erro ao buscar receitas:', error);
@@ -39,7 +39,7 @@ watchEffect(async () => {
     </div>
     <ul v-else class="lista-resultados">
       <li v-for="receita in receitas" :key="receita.id" class="card-receita">
-        <img :src="`https://tic-api-jonas.onrender.com${receita.imageUrl}`" :alt="receita.title" class="card-imagem">
+        <img :src="`https://tic-api-apn3.onrender.com${receita.imageUrl}`" :alt="receita.title" class="card-imagem">
         <div class="card-conteudo">
           <h2>{{ receita.title }}</h2>
           <RouterLink :to="`/recipe/${receita.id}`" class="card-botao">

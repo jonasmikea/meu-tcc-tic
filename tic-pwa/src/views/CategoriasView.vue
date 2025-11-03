@@ -8,7 +8,7 @@ const carregando = ref(true);
 
 onMounted(async () => {
   try {
-    const response = await axios.get('https://tic-api-jonas.onrender.com/categorias');
+    const response = await axios.get('https://tic-api-apn3.onrender.com/categorias');
     categorias.value = response.data;
   } catch (error) {
     console.error('Erro ao buscar categorias:', error);

@@ -5,7 +5,7 @@ import axios from 'axios';
 import router from '@/router';
 
 // O endereço base da nossa API
-const baseUrl = 'https://tic-api-jonas.onrender.com';
+const baseUrl = 'https://tic-api-apn3.onrender.com';
 
 export const useAuthStore = defineStore('auth', () => {
   // Estado: Tenta pegar o token do localStorage ao iniciar

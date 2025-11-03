@@ -4,7 +4,7 @@ import { useRoute } from 'vue-router';
 import axios from 'axios';
 
 const route = useRoute();
-const baseUrl = 'https://tic-api-jonas.onrender.com'; 
+const baseUrl = 'https://tic-api-apn3.onrender.com'; 
 
 const receitaId = route.params.id;
 const receita = ref(null);

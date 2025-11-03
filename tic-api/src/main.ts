@@ -131,7 +131,7 @@ async function bootstrap() {
     console.log('Banco de dados já populado. Seed não executado.');
   }
   
-  await app.listen(process.env.PORT || 3000); // Garanta que a porta está correta
+  await app.listen(process.env.PORT || 3000, '0.0.0.0'); // Garanta que a porta está correta
   console.log(`Application is running on: ${await app.getUrl()}`);
 }
 bootstrap();
