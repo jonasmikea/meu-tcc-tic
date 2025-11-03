@@ -1,0 +1,13 @@
+/* Estilos globais do seu menu */
+body {
+  /* Removemos a cor de fundo preta para manter o nosso design, 
+     mas você pode adicionar de volta se preferir */
+  font-family: "Avenir Next", "Avenir", sans-serif;
+  background-color: #ff6b08; /* O laranja desejado */
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  scroll-behavior: smooth;
+}
