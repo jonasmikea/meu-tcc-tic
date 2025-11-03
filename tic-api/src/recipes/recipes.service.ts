@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 // 👇 Importe o 'Like'
-import { Repository, Like } from 'typeorm';
+import { Repository, Like, ILike } from 'typeorm';
 import { Recipe } from './entities/recipe.entity';
 
 @Injectable()
@@ -31,7 +31,7 @@ export class RecipesService {
     // Se o nome da coluna no seu 'recipe.entity.ts' for outro, troque 'title'
     return await this.recipeRepository.find({
       where: [
-        { title: Like(`%${termo}%`) },
+        { title: ILike(`%${termo}%`) },
         // Se quiser buscar na descrição também, adicione aqui
         // { description: Like(`%${termo}%`) } 
       ],
