@@ -14,7 +14,7 @@ watchEffect(async () => {
     try {
       carregando.value = true;
       const response = await axios.get(`https://tic-api-apn3.onrender.com/recipes?q=${termoDeBusca}`); // LINHA CORRIGIDA
-      receitas.value = response.data;
+      receitas.value = response.data || [];
     } catch (error) {
       console.error('Erro ao buscar receitas:', error);
       receitas.value = [];
