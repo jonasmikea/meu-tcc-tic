@@ -39,7 +39,7 @@ watchEffect(async () => {
     </div>
     <ul v-else class="lista-resultados">
       <li v-for="receita in receitas" :key="receita.id" class="card-receita">
-        <img :src="recipe.imageUrl" :alt="recipe.title" class="recipe-image">
+        <img :src="receita.imageUrl" :alt="receita.title" class="card-imagem">
         <div class="card-conteudo">
           <h2>{{ receita.title }}</h2>
           <RouterLink :to="`/recipe/${receita.id}`" class="card-botao">
