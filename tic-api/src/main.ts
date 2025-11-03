@@ -27,8 +27,8 @@ async function bootstrap() {
   const restauranteRepo = app.get(getRepositoryToken(Restaurante));
   const ofertaRepo = app.get(getRepositoryToken(Oferta));
 
-  const categoryCount = await categoryRepo.count();
-  if (categoryCount === 0) {
+  const recipeCount = await recipeRepo.count(); // 👈 MUDEI AQUI
+  if (recipeCount === 0) {
     console.log('Populando banco de dados com dados completos...');
 
     // Categorias
