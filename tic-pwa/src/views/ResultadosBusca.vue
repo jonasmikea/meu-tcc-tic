@@ -39,7 +39,7 @@ watchEffect(async () => {
     </div>
     <ul v-else class="lista-resultados">
       <li v-for="receita in receitas" :key="receita.id" class="card-receita">
-        <img :src="`https://tic-api-apn3.onrender.com${receita.imageUrl}`" :alt="receita.title" class="card-imagem">
+        <img :src="recipe.imageUrl" :alt="recipe.title" class="recipe-image">
         <div class="card-conteudo">
           <h2>{{ receita.title }}</h2>
           <RouterLink :to="`/recipe/${receita.id}`" class="card-botao">

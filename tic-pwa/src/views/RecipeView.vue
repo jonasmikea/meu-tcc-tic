@@ -49,7 +49,7 @@ function irParaDelivery() {
   </div>
   <div v-else class="recipe-details">
     <h1>{{ recipe.title }}</h1>
-    <img :src="`https://tic-api-apn3.onrender.com${recipe.imageUrl}`" :alt="recipe.title" class="recipe-image">
+    <img :src="recipe.imageUrl" :alt="recipe.title" class="recipe-image">
     <p class="description">{{ recipe.description }}</p>
 
     <div class="actions">
